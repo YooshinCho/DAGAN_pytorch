@@ -18,8 +18,8 @@ class DaganDataset(Dataset):
     def __getitem__(self, idx):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", category=UserWarning)
-            return self.transform(self.x1_examples[idx]), self.transform(
-                self.x2_examples[idx]
+            return self.transform(np.uint8(self.x1_examples[idx])), self.transform(
+                np.uint8(self.x2_examples[idx])
             )
 
 

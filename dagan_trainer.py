@@ -178,7 +178,7 @@ class DaganTrainer:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", category=UserWarning)
             return [
-                self.display_transform(data_loader.dataset.x1_examples[idx])
+                self.display_transform(np.uint8(data_loader.dataset.x1_examples[idx]))
                 for idx in torch.randint(0, len(data_loader.dataset), (n,))
             ]
 
@@ -189,7 +189,7 @@ class DaganTrainer:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", category=UserWarning)
             return [
-                self.display_transform(val_images[idx])
+                self.display_transform(np.uint8(val_images[idx]))
                 for idx in torch.randint(0, len(val_images), (n,))
             ]
 
@@ -199,8 +199,8 @@ class DaganTrainer:
             n, val_images
         )
         img_size = images[0].shape[-1]
-        images.append(torch.tensor(np.ones((1, img_size, img_size))).float())
-        images.append(torch.tensor(np.ones((1, img_size, img_size))).float() * -1)
+        images.append(torch.tensor(np.ones((3, img_size, img_size))).float())
+        images.append(torch.tensor(np.ones((3, img_size, img_size))).float() * -1)
         self.render_img(torch.cat(images, 1)[0])
         z = torch.randn((len(images), self.g.z_dim)).to(self.device)
         inp = torch.stack(images).to(self.device)
