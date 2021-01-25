@@ -201,7 +201,7 @@ class DaganTrainer:
         img_size = images[0].shape[-1]
         images.append(torch.tensor(np.ones((3, img_size, img_size))).float())
         images.append(torch.tensor(np.ones((3, img_size, img_size))).float() * -1)
-        #self.render_img(torch.cat(images, 1).permute(2,1,0))
+        self.render_img(torch.cat(images, 1).permute(2,1,0))
         z = torch.randn((len(images), self.g.z_dim)).to(self.device)
         inp = torch.stack(images).to(self.device)
         train_gen = self.g(inp, z).cpu()
