@@ -194,18 +194,18 @@ class DaganTrainer:
             ]
 
     def display_generations(self, data_loader, val_images):
-        n = 5
+        n = 3
         images = self.sample_train_images(n, data_loader) + self.sample_val_images(
             n, val_images
         )
         img_size = images[0].shape[-1]
         images.append(torch.tensor(np.ones((3, img_size, img_size))).float())
         images.append(torch.tensor(np.ones((3, img_size, img_size))).float() * -1)
-        self.render_img(torch.cat(images, 1)[0])
+        self.render_img(torch.cat(images, 1))
         z = torch.randn((len(images), self.g.z_dim)).to(self.device)
         inp = torch.stack(images).to(self.device)
         train_gen = self.g(inp, z).cpu()
-        self.render_img(train_gen.reshape(-1, train_gen.shape[-1]))
+        self.render_img(train_gen.reshape(train_gen.shape[0],-1, train_gen.shape[-1]))
 
     def print_progress(self, data_loader, val_images):
         self.g.eval()
