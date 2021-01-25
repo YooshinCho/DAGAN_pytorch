@@ -1,3 +1,4 @@
+datasets/*.npy
 checkpoints/*
 !*readme.txt
 *.DS_Store
