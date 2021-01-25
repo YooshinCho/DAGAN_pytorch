@@ -201,11 +201,12 @@ class DaganTrainer:
         img_size = images[0].shape[-1]
         images.append(torch.tensor(np.ones((3, img_size, img_size))).float())
         images.append(torch.tensor(np.ones((3, img_size, img_size))).float() * -1)
-        self.render_img(torch.cat(images, 1))
+        #self.render_img(torch.cat(images, 1).permute(2,1,0))
         z = torch.randn((len(images), self.g.z_dim)).to(self.device)
         inp = torch.stack(images).to(self.device)
         train_gen = self.g(inp, z).cpu()
-        self.render_img(train_gen.reshape(train_gen.shape[0],-1, train_gen.shape[-1]))
+        train_gen = train_gen.permute(0,2,3,1)
+        self.render_img(train_gen.reshape(-1, *train_gen.shape[-2:]))
 
     def print_progress(self, data_loader, val_images):
         self.g.eval()
