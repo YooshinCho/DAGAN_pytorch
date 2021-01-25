@@ -9,7 +9,7 @@ for subdir in os.listdir(imagedir):
     for filename in os.listdir(os.path.join(imagedir, subdir)):
         im = Image.open(os.path.join(imagedir, subdir, filename))
         im_ = np.array(im.resize((28,28)), dtype=np.float32)
-        im_ = ( im_ / 255. - 0.5 ) * 2
+        im_ =  im_ / 255. 
 
         Images[int(subdir),cnt] = im_
         cnt += 1

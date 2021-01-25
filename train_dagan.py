@@ -54,8 +54,6 @@ d = Discriminator(dim=img_size, channels=in_channels * 2, dropout_rate=dropout_r
 mid_pixel_value = max_pixel_value / 2
 train_transform = transforms.Compose(
     [
-        transforms.ToPILImage(),
-        transforms.Resize(img_size),
         transforms.ToTensor(),
         transforms.Normalize(
             (mid_pixel_value,) * in_channels, (mid_pixel_value,) * in_channels
