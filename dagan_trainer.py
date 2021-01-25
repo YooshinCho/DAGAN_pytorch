@@ -127,7 +127,7 @@ class DaganTrainer:
         for i, data in enumerate(data_loader):
             if i % self.print_every == 0:
                 print("Iteration {}".format(i))
-                self.print_progress(data_loader, val_images)
+                # self.print_progress(data_loader, val_images)
             self.num_steps += 1
             x1, x2 = data[0].to(self.device), data[1].to(self.device)
             self._critic_train_iteration(x1, x2)
