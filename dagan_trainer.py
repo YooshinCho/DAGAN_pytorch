@@ -172,7 +172,7 @@ class DaganTrainer:
     def render_img(self, arr):
         arr = (arr * 0.5) + 0.5
         arr = np.uint8(arr * 255)
-        display(Image.fromarray(arr, mode="L").transpose(PIL.Image.TRANSPOSE))
+        display(Image.fromarray(arr, mode="RGB").transpose(PIL.Image.TRANSPOSE))
 
     def sample_train_images(self, n, data_loader):
         with warnings.catch_warnings():
