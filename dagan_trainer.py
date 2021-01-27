@@ -22,7 +22,7 @@ class DaganTrainer:
         batch_size,
         device="cpu",
         gp_weight=10,
-        critic_iterations=5,
+        critic_iterations=1,
         print_every=50,
         num_tracking_images=0,
         save_checkpoint_path=None,
